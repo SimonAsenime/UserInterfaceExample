@@ -16,8 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 +(ImageModel*)sharedInstance;
 
 -(UIImage*)getImageWithName:(NSString*)name;
-
-@property (strong, nonatomic) NSArray* imageNames;
+-(UIImage*)getImageWithIndex:(NSInteger)index;
+-(NSInteger)numberOfImages;
+-(NSString*)getImageNameForIndex:(NSInteger)index;
 
 @end
 

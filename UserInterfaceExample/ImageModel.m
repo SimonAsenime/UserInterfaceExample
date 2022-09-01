@@ -8,8 +8,16 @@
 
 #import "ImageModel.h"
 
+@interface ImageModel ()
+
+@property (strong, nonatomic) NSArray* imageNames;
+@property (strong, nonatomic) NSDictionary* images;
+
+@end
+
 @implementation ImageModel
 @synthesize imageNames = _imageNames;
+@synthesize images = _images;
 
 +(ImageModel*)sharedInstance{
     static ImageModel* _sharedInstance = nil;
@@ -28,13 +36,27 @@
     return _imageNames; 
 }
 
+-(NSDictionary*) images{
+    if (!_images)
+        _images = @{@"Bill" : [UIImage imageNamed:@"Bill"], @"Eric" : [UIImage imageNamed:@"Eric"], @"Jeff" : [UIImage imageNamed:@"Jeff"]};
+    return _images;
+}
+
 
 -(UIImage*)getImageWithName:(NSString*)name{
-    UIImage* image = nil;
-    
-    image = [UIImage imageNamed:name];
-    
-    return image;
+    return [self.images objectForKey:name];
+}
+
+-(UIImage*)getImageWithIndex:(NSInteger)index{
+    return [self.images objectForKey:self.imageNames[index]];
+}
+
+-(NSInteger) numberOfImages{
+    return [self.images count];
+}
+
+-(NSString*) getImageNameForIndex:(NSInteger)index {
+    return self.imageNames[index];
 }
 
 @end
